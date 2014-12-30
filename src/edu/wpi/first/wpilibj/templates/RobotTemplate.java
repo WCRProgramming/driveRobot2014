@@ -36,20 +36,23 @@ public class RobotTemplate extends SimpleRobot {
             double speedControl = rightStick.getZ();
             speedControl++;
             speedControl/=2;
-            double axisY = leftStick.getRawAxis(2)*speedControl;
-            double axisX = leftStick.getRawAxis(4)*speedControl;
-            double leftAxisY = leftStick.getY()*speedControl;
-            double rightAxisX = rightStick.getX()*speedControl;
+            double gamepadLeftY = leftStick.getRawAxis(2)*speedControl; //get left gamepad control for acceleration
+            double gamepadRightX = leftStick.getRawAxis(4)*speedControl; //get right gamepad control for driving
+            double gamepadTrigger = leftStick.getRawAxis(5)*speedControl;//get gamepad trigger for acceleration
+            double joystickLeftY = leftStick.getY()*speedControl;          //get left joystick y axis for acceleration
+            double joystickRightX = rightStick.getX()*speedControl;         //get right joystick x axis for driving
                         
                       //A Challenger Approaches!\\
             /*-----------------Tank Drive-----------------*/
-            //chassis.tankDrive(leftStick, rightStick, true);
+            //chassis.tankDrive(leftStick, rightStick, true);                      //use two joysticks to TANK drive
             /*------------Arcade Drive Gamepad------------*/
-            //chassis.arcadeDrive(axisX, axisY, true);
+            //chassis.arcadeDrive(gamepadLeftY, gamepadRightX, true);              //use gamepad to ARCADE drive with joysticks
+            /*-----Arcade Drive Gamepad with Trigger------*/
+            //chassis.arcadeDrive(gamepadTrigger, gamepadRightX, true);            //use gamepad to ARCADE drive with right joystick & trigger
             /*--------Arcade Drive Two Joystick(s)--------*/
-            chassis.arcadeDrive(leftAxisY, rightAxisX, true);
+            chassis.arcadeDrive(joystickLeftY, joystickRightX, true);              //use two joysticks to ARCADE drive
             /*--------Arcade Drive One Joystick(s)--------*/
-            //chassis.arcadeDrive(leftStick, true);
+            //chassis.arcadeDrive(leftStick, true);                                //use left joystick to ARCADE drive
             /*--------------------QED---------------------*/
         }   
     }
